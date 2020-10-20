@@ -3,20 +3,17 @@ package GUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.Random;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
+
 
 import Logica.*;
 
-import java.util.logging.*;
 
-import java.io.IOException;
+@SuppressWarnings("serial")
 public class GUI extends JFrame  {
 	private Juego juego;
 	
@@ -26,7 +23,7 @@ public class GUI extends JFrame  {
 	private JPanel panelJuego,panelControl;
 	private JLabel lblNewLabel,lblNewLabel_1,lblNewLabel_3,lblNewLabel_4,lblNewLabel_5,lblNewLabel_6;
 	
-	private JLabel [][]sudoku=new JLabel [9][9];
+	//private JLabel [][]sudoku=new JLabel [9][9];
 	private int [][] solucion=new int[9][9];
 	JLabel otrolabel;
 	JLabel otrolabe2;
@@ -249,7 +246,7 @@ public class GUI extends JFrame  {
 			for(int j=0;j<juego.cantFilas();j++) {
 
 				valor=r.nextInt(100);
-				if(valor<10) {
+				if(valor<50) {
 					juego.getGrilla().getCelda(i, j).setValor(0);
 					juego.getGrilla().getCelda(i, j).getJLabel().setIcon(juego.getGrilla().getCelda(i, j).getEntidadGrafica().getImageIcon());
 				}
@@ -269,7 +266,7 @@ public class GUI extends JFrame  {
 		}
 		
 	}
-
+	/**
 	private boolean verificarCorrectitud() {
 		boolean cumple=true;
 		for(int i=0;i<juego.cantFilas() && cumple;i++) {
@@ -279,18 +276,17 @@ public class GUI extends JFrame  {
 		}
 		return cumple;
 	}
-
+	 */
 	private void llenarSudoku() {
-		File archivo = null;
-	      FileReader fr = null;
+		InputStream  archivo = null;
 	      BufferedReader br = null;
 	      int valor;
 	      
 	      try {
 	        
-	         archivo = new File ("sudoku1.txt");
-	         fr = new FileReader (archivo);
-	         br = new BufferedReader(fr);
+	         archivo =getClass().getResourceAsStream("sudoku1.txt");
+	         //fr = new FileReader (archivo);
+	         br = new BufferedReader(new InputStreamReader(archivo));
 
 	         String linea;
 	         int i=0;
@@ -304,7 +300,6 @@ public class GUI extends JFrame  {
 	        		 juego.getGrilla().getCelda(i, j).setValor(valor);
 	        		 if(juego.esvalido(juego.getGrilla().getCelda(i, j))) {
 		        		 juego.getGrilla().getCelda(i, j).getJLabel().setIcon(juego.getGrilla().getCelda(i, j).getEntidadGrafica().getImageIcon());
-	        		 	 juego.getGrilla().getCelda(i, j).getJLabel().setEnabled(false);
 	        		 	}
 	        		 else {
 		        		 juego.getGrilla().getCelda(i, j).setValor(-1*valor);
@@ -327,15 +322,6 @@ public class GUI extends JFrame  {
 	    	  System.exit(0);
 				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    	  
-	      }finally{
-	    	  	try{                    
-	    	  		if( null != fr ){   
-	    	  			fr.close();     
-	    	  		}                  
-	    	  	}
-	    	  	catch (Exception e2){ 
-	    	  		e2.printStackTrace();
-	    	  	}
 	      }
 		
 	}

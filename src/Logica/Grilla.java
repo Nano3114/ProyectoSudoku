@@ -1,6 +1,5 @@
 package Logica;
 
-import javax.swing.JLabel;
 
 public class Grilla {
 		private Celda [][] celdas;

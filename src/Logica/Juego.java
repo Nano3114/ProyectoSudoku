@@ -1,10 +1,4 @@
 package Logica;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import Logica.Celda;
 	public class Juego {	
@@ -47,7 +41,6 @@ import Logica.Celda;
 					if(verificaGrilla(celda.getGrilla()))
 						valido=true;
 						
-			System.out.println(valido);			
 			return valido;
 		}	
 		
@@ -92,7 +85,6 @@ import Logica.Celda;
 		
 		public boolean verificarCol(int i) {
 			boolean [] b= {false,false,false,false,false,false,false,false,false};
-			int k=0;
 			boolean cumple =true;
 			int valor;
 			for(int j=0;j<cantFilas() && cumple ;j++) {
